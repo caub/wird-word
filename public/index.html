@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#4f46e5" />
+    <title>Wird Word</title>
+    <link rel="stylesheet" href="/style.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <a href="#/" class="logo">Wird<span>Word</span></a>
+      <div id="whoami" class="whoami" hidden>
+        <span id="whoami-name"></span>
+        <button id="logout" class="link">Log out</button>
+      </div>
+    </header>
+
+    <main>
+      <!-- Login -->
+      <section id="view-login" class="view card" hidden>
+        <h1>One word at a time</h1>
+        <p class="muted">Build a story together. Each player adds exactly one word per turn, typed or spoken.</p>
+        <form id="login-form" class="stack">
+          <label for="login-username">Username</label>
+          <input id="login-username" maxlength="20" autocomplete="username" autocapitalize="off" spellcheck="false" required />
+          <label for="login-password">Password</label>
+          <input id="login-password" type="password" maxlength="200" autocomplete="current-password" required />
+          <div class="row">
+            <button class="primary" type="submit" value="login">Log in</button>
+            <button type="submit" value="signup">Create account</button>
+          </div>
+          <p class="muted small">New here? Pick a username (3 to 20 letters, digits, <code>.</code> <code>-</code> <code>_</code>) and a password of at least 8 characters, then tap Create account.</p>
+        </form>
+      </section>
+
+      <!-- Lobby -->
+      <section id="view-lobby" class="view" hidden>
+        <div class="card" id="my-games" hidden>
+          <h2>My games</h2>
+          <ul id="my-room-list" class="room-list"></ul>
+        </div>
+
+        <div class="card">
+          <h2>New room</h2>
+          <form id="create-form" class="stack">
+            <input id="create-name" maxlength="40" placeholder="Room name (optional)" />
+            <div class="row">
+              <label for="create-max">Players</label>
+              <select id="create-max">
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+              </select>
+              <label class="check" id="create-ai-wrap">
+                <input type="checkbox" id="create-ai" /> Add Gemini player
+              </label>
+            </div>
+            <button class="primary" type="submit">Create room</button>
+          </form>
+        </div>
+
+        <div class="card">
+          <h2>Join a room</h2>
+          <form id="join-form" class="row">
+            <input id="join-code" maxlength="6" placeholder="Room code" autocapitalize="characters" />
+            <button type="submit">Join</button>
+          </form>
+          <ul id="room-list" class="room-list"></ul>
+          <p id="room-empty" class="muted">No open rooms yet. Create one!</p>
+        </div>
+      </section>
+
+      <!-- Room -->
+      <section id="view-room" class="view" hidden>
+        <div class="card room-head">
+          <div>
+            <h2 id="room-name"></h2>
+            <button id="room-code" class="code" title="Copy invite link"></button>
+          </div>
+          <button id="room-leave">Leave</button>
+        </div>
+
+        <ul id="players" class="players"></ul>
+
+        <div id="room-waiting" class="card stack" hidden>
+          <p id="waiting-text" class="muted"></p>
+          <div class="row" id="host-controls">
+            <button id="add-ai">+ Gemini player</button>
+            <button id="remove-ai">− Gemini player</button>
+            <button id="start" class="primary">Start game</button>
+          </div>
+        </div>
+
+        <div class="card story-card">
+          <p id="story" class="story"></p>
+          <p id="story-empty" class="muted">The story starts with the first word…</p>
+        </div>
+
+        <p id="notice" class="notice" hidden></p>
+
+        <form id="word-form" class="word-form" hidden>
+          <p id="turn-text" class="turn-text"></p>
+          <div class="row">
+            <input id="word" autocomplete="off" autocapitalize="off" spellcheck="false" maxlength="30" placeholder="One word" />
+            <button id="mic" type="button" class="mic" title="Say your word" aria-label="Say your word">
+              <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path fill="currentColor" d="M12 15a3 3 0 0 0 3-3V6a3 3 0 0 0-6 0v6a3 3 0 0 0 3 3Zm5-3a5 5 0 0 1-10 0H5a7 7 0 0 0 6 6.92V21h2v-2.08A7 7 0 0 0 19 12h-2Z"/></svg>
+            </button>
+            <button id="send" type="submit" class="primary">Send</button>
+          </div>
+        </form>
+
+        <div class="row room-foot">
+          <label class="check"><input type="checkbox" id="tts" checked /> Read words aloud</label>
+          <button id="restart" class="link" hidden>New story</button>
+        </div>
+      </section>
+    </main>
+
+    <div id="toast" class="toast" hidden></div>
+    <script type="module" src="/app.js"></script>
+  </body>
+</html>

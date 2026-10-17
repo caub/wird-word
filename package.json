@@ -1,0 +1,17 @@
+{
+  "name": "wird-word",
+  "version": "0.1.0",
+  "private": true,
+  "description": "One word at a time: a turn-based multiplayer story game, with an optional Gemini player",
+  "type": "module",
+  "scripts": {
+    "start": "node --env-file-if-exists=.env server.js",
+    "dev": "node --watch --env-file-if-exists=.env server.js"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "dependencies": {
+    "pg": "^8.23.1"
+  }
+}
